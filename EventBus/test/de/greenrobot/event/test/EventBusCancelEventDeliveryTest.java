@@ -17,7 +17,6 @@ package de.greenrobot.event.test;
 
 import java.util.concurrent.CountDownLatch;
 
-import android.test.UiThreadTest;
 import de.greenrobot.event.EventBusException;
 
 /**
@@ -65,7 +64,7 @@ public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
         assertNotNull(failed);
     }
 
-    @UiThreadTest
+//    @UiThreadTest
     public void testCancelInMainThread() {
         SubscriberMainThread subscriber = new SubscriberMainThread();
         eventBus.register(subscriber);

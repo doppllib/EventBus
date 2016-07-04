@@ -17,9 +17,12 @@ package de.greenrobot.event.test;
 
 import android.os.Looper;
 
+import co.touchlab.doppel.testing.DoppelTest;
+
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
 public class EventBusBackgroundThreadTest extends AbstractEventBusTest {
 
     public void testPostInCurrentThread() throws InterruptedException {

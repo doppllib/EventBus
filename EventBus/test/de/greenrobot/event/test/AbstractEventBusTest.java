@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.TestCase;
-import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -59,6 +58,7 @@ public class AbstractEventBusTest extends TestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
+        Looper.prepareMainLooper();
         EventBus.clearCaches();
         eventBus = new EventBus();
         mainPoster = new EventPostHandler(Looper.getMainLooper());
@@ -98,7 +98,6 @@ public class AbstractEventBusTest extends TestCase {
         eventCount.incrementAndGet();
     }
 
-    @SuppressLint("HandlerLeak")
     class EventPostHandler extends Handler {
         public EventPostHandler(Looper looper) {
             super(looper);

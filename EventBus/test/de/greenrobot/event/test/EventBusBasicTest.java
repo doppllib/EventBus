@@ -15,8 +15,11 @@
  */
 package de.greenrobot.event.test;
 
-import android.app.Activity;
+import android.app.Application;
+import android.content.IOSContext;
 import android.util.Log;
+
+import co.touchlab.doppel.testing.DoppelTest;
 import de.greenrobot.event.EventBus;
 import junit.framework.TestCase;
 
@@ -25,6 +28,7 @@ import java.lang.ref.WeakReference;
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
 public class EventBusBasicTest extends TestCase {
 
     private EventBus eventBus;
@@ -231,7 +235,7 @@ public class EventBusBasicTest extends TestCase {
         countMyEventExtended++;
     }
 
-    static class TestActivity extends Activity {
+    static class TestActivity extends IOSContext {
         public String lastStringEvent;
 
         public void onEvent(String event) {
