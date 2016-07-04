@@ -1,3 +1,6 @@
+#Doppl Changes
+UI related stuff removed. Error dialog and such.
+
 EventBus
 ========
 EventBus is publish/subscribe event bus optimized for Android.<br/>

@@ -19,7 +19,6 @@ import java.lang.reflect.Constructor;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import android.app.Activity;
 import android.util.Log;
 import de.greenrobot.event.EventBus;
 
@@ -58,10 +57,11 @@ public class AsyncExecutor {
             return buildForScope(null);
         }
 
-        public AsyncExecutor buildForActivityScope(Activity activity) {
+        //No Activity, but keeping this class around just in case.
+        /*public AsyncExecutor buildForActivityScope(Activity activity) {
             return buildForScope(activity.getClass());
-        }
-        
+        }*/
+
         public AsyncExecutor buildForScope(Object executionContext) {
             if (eventBus == null) {
                 eventBus = EventBus.getDefault();
