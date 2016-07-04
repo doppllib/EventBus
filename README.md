@@ -1,3 +1,7 @@
+# Doppl Stuff
+
+Master is a very different version of eventbus than most projects use. Only 2.4.0 is supported for Doppl. See the v2.4.0 branch.
+
 EventBus
 ========
 EventBus is a publish/subscribe event bus optimized for Android.<br/>
