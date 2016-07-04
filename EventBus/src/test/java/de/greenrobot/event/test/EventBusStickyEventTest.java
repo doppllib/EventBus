@@ -15,11 +15,20 @@
  */
 package de.greenrobot.event.test;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
+
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusStickyEventTest extends AbstractEventBusTest {
 
+    @Test
     public void testPostSticky() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.registerSticky(this);
@@ -27,6 +36,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(Thread.currentThread(), lastThread);
     }
 
+    @Test
     public void testPostStickyTwoEvents() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.postSticky(new IntTestEvent(7));
@@ -34,6 +44,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(2, eventCount.intValue());
     }
 
+    @Test
     public void testPostStickyRegisterNonSticky() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.register(this);
@@ -41,6 +52,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(0, eventCount.intValue());
     }
 
+    @Test
     public void testPostNonStickyRegisterSticky() throws InterruptedException {
         eventBus.post("NonSticky");
         eventBus.registerSticky(this);
@@ -48,6 +60,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(0, eventCount.intValue());
     }
 
+    @Test
     public void testPostStickyTwice() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.postSticky("NewSticky");
@@ -55,6 +68,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals("NewSticky", lastEvent);
     }
 
+    @Test
     public void testPostStickyThenPostNormal() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.post("NonSticky");
@@ -62,6 +76,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals("Sticky", lastEvent);
     }
 
+    @Test
     public void testPostStickyWithRegisterAndUnregister() throws InterruptedException {
         eventBus.registerSticky(this);
         eventBus.postSticky("Sticky");
@@ -82,11 +97,13 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals("NewSticky", lastEvent);
     }
 
+    @Test
     public void testPostStickyAndGet() throws InterruptedException {
         eventBus.postSticky("Sticky");
         assertEquals("Sticky", eventBus.getStickyEvent(String.class));
     }
 
+    @Test
     public void testPostStickyRemoveClass() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.removeStickyEvent(String.class);
@@ -96,6 +113,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(0, eventCount.intValue());
     }
 
+    @Test
     public void testPostStickyRemoveEvent() throws InterruptedException {
         eventBus.postSticky("Sticky");
         assertTrue(eventBus.removeStickyEvent("Sticky"));
@@ -105,6 +123,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(0, eventCount.intValue());
     }
 
+    @Test
     public void testPostStickyRemoveAll() throws InterruptedException {
         eventBus.postSticky("Sticky");
         eventBus.postSticky(new IntTestEvent(77));
@@ -116,6 +135,7 @@ public class EventBusStickyEventTest extends AbstractEventBusTest {
         assertEquals(0, eventCount.intValue());
     }
 
+    @Test
     public void testRemoveStickyEventInSubscriber() throws InterruptedException {
         eventBus.registerSticky(new Object() {
             @SuppressWarnings("unused")

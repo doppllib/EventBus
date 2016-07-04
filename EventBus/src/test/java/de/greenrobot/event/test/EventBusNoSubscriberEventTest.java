@@ -15,6 +15,11 @@
  */
 package de.greenrobot.event.test;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.NoSubscriberEvent;
 import de.greenrobot.event.SubscriberExceptionEvent;
@@ -22,8 +27,12 @@ import de.greenrobot.event.SubscriberExceptionEvent;
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusNoSubscriberEventTest extends AbstractEventBusTest {
 
+
+    @Test
     public void testNoSubscriberEvent() {
         eventBus.register(this);
         eventBus.post("Foo");
@@ -34,6 +43,7 @@ public class EventBusNoSubscriberEventTest extends AbstractEventBusTest {
         assertSame(eventBus, noSub.eventBus);
     }
 
+    @Test
     public void testNoSubscriberEventAfterUnregister() {
         Object subscriber = new Object() {
             @SuppressWarnings("unused")
@@ -44,6 +54,7 @@ public class EventBusNoSubscriberEventTest extends AbstractEventBusTest {
         eventBus.unregister(subscriber);
         testNoSubscriberEvent();
     }
+
 
     public void testBadNoSubscriberSubscriber() {
         eventBus = EventBus.builder().logNoSubscriberMessages(false).build();

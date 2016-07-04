@@ -25,12 +25,15 @@ import junit.framework.TestCase;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
+import org.junit.Before;
+
 import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
-public class AbstractEventBusTest extends TestCase {
+public abstract class AbstractEventBusTest extends TestCase {
     /** Activates long(er) running tests e.g. testing multi-threading more throughly.  */
     protected static final boolean LONG_TESTS = false;
 
@@ -56,13 +59,20 @@ public class AbstractEventBusTest extends TestCase {
         }
     }
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         super.setUp();
-        Looper.prepareMainLooper();
+
         EventBus.clearCaches();
         eventBus = new EventBus();
         mainPoster = new EventPostHandler(Looper.getMainLooper());
-        assertFalse(Looper.getMainLooper().getThread().equals(Thread.currentThread()));
+
+        Thread currentThread = Thread.currentThread();
+        Thread looperThread = Looper.getMainLooper().getThread();
+
+        boolean threadsEqual = looperThread.equals(currentThread);
+
+        assertFalse(threadsEqual);
     }
 
     protected void postInMainThread(Object event) {

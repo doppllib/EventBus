@@ -15,17 +15,25 @@
  */
 package de.greenrobot.event.test;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.util.concurrent.CountDownLatch;
 
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBusException;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
 
     private Throwable failed;
 
+    @Test
     public void testCancel() {
         Subscriber canceler = new Subscriber(true);
         eventBus.register(new Subscriber(false));
@@ -39,6 +47,7 @@ public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
         assertEquals(1 + 2, eventCount.intValue());
     }
 
+    @Test
     public void testCancelInBetween() {
         Subscriber canceler = new Subscriber(true);
         eventBus.register(canceler, 2);
@@ -48,6 +57,7 @@ public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
         assertEquals(2, eventCount.intValue());
     }
 
+    @Test
     public void testCancelOutsideEventHandler() {
         try {
             eventBus.cancelEventDelivery(this);
@@ -57,6 +67,7 @@ public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
         }
     }
 
+    @Test
     public void testCancelWrongEvent() {
         eventBus.register(new SubscriberCancelOtherEvent());
         eventBus.post("42");
@@ -65,6 +76,8 @@ public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
     }
 
 //    @UiThreadTest
+
+    @Test
     public void testCancelInMainThread() {
         SubscriberMainThread subscriber = new SubscriberMainThread();
         eventBus.register(subscriber);

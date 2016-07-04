@@ -9,31 +9,15 @@ version = '2.4.0.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-/*dependencies {
-    provided 'com.google.android:android:4.1.1.4'
-    provided 'com.google.android:android-test:4.1.1.4'
-    provided 'com.google.android:annotations:4.1.1.4'
-    provided 'com.google.android:support-v4:r7'
-}*/
-
 dependencies {
     compile 'junit:junit:4.11'
     testApt 'co.touchlab.doppel:testapt:'+ coreVersion
 }
 
-sourceSets {
-    main {
-        compileClasspath += configurations.provided
-        java {
-            srcDir 'src'
-            // exclude 'de/greenrobot/event/util/**'
-        }
-    }
-    test{
-        java{
-            srcDir 'test'
-        }
-    }
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class" // whatever Ant pattern matches your test class files
+    exclude "**/Abstract*"
 }
 
 publishing {

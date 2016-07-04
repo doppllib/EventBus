@@ -18,38 +18,51 @@ package de.greenrobot.event.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 import android.util.Log;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusOrderedSubscriptionsTest extends AbstractEventBusTest {
 
     int lastPrio = Integer.MAX_VALUE;
     final List<PrioSubscriber> registered = new ArrayList<PrioSubscriber>();
     private String fail;
 
+    @Test
     public void testOrdered() {
         runTestOrdered("42", false);
     }
 
+    @Test
     public void testOrderedMainThread() {
         runTestOrdered(new IntTestEvent(42), false);
     }
 
+    @Test
     public void testOrderedBackgroundThread() {
         runTestOrdered(Integer.valueOf(42), false);
     }
-    
+
+    @Test
     public void testOrderedSticky() {
         runTestOrdered("42", true);
     }
 
+    @Test
     public void testOrderedMainThreadSticky() {
         runTestOrdered(new IntTestEvent(42), true);
     }
 
+    @Test
     public void testOrderedBackgroundThreadSticky() {
         runTestOrdered(Integer.valueOf(42), true);
     }

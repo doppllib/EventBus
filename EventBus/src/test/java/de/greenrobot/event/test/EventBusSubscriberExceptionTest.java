@@ -15,14 +15,22 @@
  */
 package de.greenrobot.event.test;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.SubscriberExceptionEvent;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusSubscriberExceptionTest extends AbstractEventBusTest {
 
+    @Test
     public void testSubscriberExceptionEvent() {
         eventBus = EventBus.builder().logSubscriberExceptions(false).build();
         eventBus.register(this);
@@ -35,6 +43,7 @@ public class EventBusSubscriberExceptionTest extends AbstractEventBusTest {
         assertEquals("Bar", exEvent.throwable.getMessage());
     }
 
+    @Test
     public void testBadExceptionSubscriber() {
         eventBus = EventBus.builder().logSubscriberExceptions(false).build();
         eventBus.register(this);

@@ -17,14 +17,20 @@ package de.greenrobot.event.test;
 
 import android.os.Looper;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 
 /**
  * @author Markus Junginger, greenrobot
  */
 @DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusBackgroundThreadTest extends AbstractEventBusTest {
 
+    @Test
     public void testPostInCurrentThread() throws InterruptedException {
         eventBus.register(this);
         eventBus.post("Hello");
@@ -34,6 +40,7 @@ public class EventBusBackgroundThreadTest extends AbstractEventBusTest {
         assertEquals(Thread.currentThread(), lastThread);
     }
 
+    @Test
     public void testPostFromMain() throws InterruptedException {
         eventBus.register(this);
         postInMainThread("Hello");

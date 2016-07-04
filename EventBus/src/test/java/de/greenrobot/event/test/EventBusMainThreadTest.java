@@ -20,14 +20,24 @@ import java.util.List;
 
 import android.os.Looper;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
+
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMainThreadTest extends AbstractEventBusTest {
 
     private BackgroundPoster backgroundPoster;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         super.setUp();
         backgroundPoster = new BackgroundPoster();
         backgroundPoster.start();
@@ -40,6 +50,7 @@ public class EventBusMainThreadTest extends AbstractEventBusTest {
         super.tearDown();
     }
 
+    @Test
     public void testPost() throws InterruptedException {
         eventBus.register(this);
         eventBus.post("Hello");
@@ -49,6 +60,7 @@ public class EventBusMainThreadTest extends AbstractEventBusTest {
         assertEquals(Looper.getMainLooper().getThread(), lastThread);
     }
 
+    @Test
     public void testPostInBackgroundThread() throws InterruptedException {
         eventBus.register(this);
         backgroundPoster.post("Hello");

@@ -22,11 +22,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.os.Looper;
 import android.util.Log;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMultithreadedTest extends AbstractEventBusTest {
 
     private static final int COUNT = LONG_TESTS ? 100000 : 1000;
@@ -41,30 +49,37 @@ public class EventBusMultithreadedTest extends AbstractEventBusTest {
 
     private IntTestEvent lastIntTestEvent;
 
+    @Test
     public void testPost01Thread() throws InterruptedException {
         runThreadsSingleEventType(1);
     }
 
+    @Test
     public void testPost04Threads() throws InterruptedException {
         runThreadsSingleEventType(4);
     }
 
+    @Test
     public void testPost40Threads() throws InterruptedException {
         runThreadsSingleEventType(40);
     }
 
+    @Test
     public void testPostMixedEventType01Thread() throws InterruptedException {
         runThreadsMixedEventType(1);
     }
 
+    @Test
     public void testPostMixedEventType04Threads() throws InterruptedException {
         runThreadsMixedEventType(4);
     }
 
+    @Test
     public void testPostMixedEventType40Threads() throws InterruptedException {
         runThreadsMixedEventType(40);
     }
 
+    @Test
     public void testSubscribeUnSubscribeAndPostMixedEventType() throws InterruptedException {
         List<SubscribeUnsubscribeThread> threads = new ArrayList<SubscribeUnsubscribeThread>();
 

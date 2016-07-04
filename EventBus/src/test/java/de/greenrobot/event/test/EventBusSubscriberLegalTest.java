@@ -15,13 +15,21 @@
  */
 package de.greenrobot.event.test;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBusException;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusSubscriberLegalTest extends AbstractEventBusTest {
 
+    @Test
     public void testSubscriberLegal() {
         eventBus.register(this);
         eventBus.post("42");
@@ -29,6 +37,7 @@ public class EventBusSubscriberLegalTest extends AbstractEventBusTest {
         assertEquals(1, eventCount.intValue());
     }
 
+    @Test
     public void testSubscriberNotPublic() {
         try {
             eventBus.register(new NotPublic());
@@ -38,6 +47,7 @@ public class EventBusSubscriberLegalTest extends AbstractEventBusTest {
         }
     }
 
+    @Test
     public void testSubscriberStatic() {
         try {
             eventBus.register(new Static());
@@ -47,6 +57,7 @@ public class EventBusSubscriberLegalTest extends AbstractEventBusTest {
         }
     }
 
+    @Test
     public void testSubscriberLegalAbstract() {
         eventBus.register(new Abstract() {
 

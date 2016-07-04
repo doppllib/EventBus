@@ -19,9 +19,16 @@ import android.app.Application;
 import android.content.IOSContext;
 import android.util.Log;
 
+import co.touchlab.doppel.testing.DoppelHacks;
 import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
+import co.touchlab.doppel.testing.PlatformUtils;
 import de.greenrobot.event.EventBus;
 import junit.framework.TestCase;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.lang.ref.WeakReference;
 
@@ -29,6 +36,7 @@ import java.lang.ref.WeakReference;
  * @author Markus Junginger, greenrobot
  */
 @DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusBasicTest extends TestCase {
 
     private EventBus eventBus;
@@ -39,11 +47,13 @@ public class EventBusBasicTest extends TestCase {
     private int countMyEventExtended;
     private int countMyEvent;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         super.setUp();
         eventBus = new EventBus();
     }
 
+    @Test
     public void testRegisterAndPost() {
         // Use an activity to test real life performance
         TestActivity testActivity = new TestActivity();
@@ -59,16 +69,21 @@ public class EventBusBasicTest extends TestCase {
         assertEquals(event, testActivity.lastStringEvent);
     }
 
+    @Test
     public void testPostWithoutSubscriber() {
         eventBus.post("Hello");
     }
 
+    @Test
     public void testUnregisterWithoutRegister() {
         // Results in a warning without throwing
         eventBus.unregister(this);
     }
 
+    @DoppelHacks //Not sure how to test weak reference in j2objc
     public void testUnregisterNotLeaking() {
+        if(PlatformUtils.isJ2objc())
+            return;
         EventBusBasicTest subscriber = new EventBusBasicTest();
         eventBus.register(subscriber);
         eventBus.unregister(subscriber);
@@ -90,6 +105,7 @@ public class EventBusBasicTest extends TestCase {
         assertNull(ref.get());
     }
 
+    @Test
     public void testRegisterTwice() {
         eventBus.register(this);
         try {
@@ -100,6 +116,7 @@ public class EventBusBasicTest extends TestCase {
         }
     }
 
+    @Test
     public void testIsRegistered() {
         assertFalse(eventBus.isRegistered(this));
         eventBus.register(this);
@@ -108,6 +125,7 @@ public class EventBusBasicTest extends TestCase {
         assertFalse(eventBus.isRegistered(this));
     }
 
+    @Test
     public void testPostWithTwoSubscriber() {
         EventBusBasicTest test2 = new EventBusBasicTest();
         eventBus.register(this);
@@ -118,6 +136,7 @@ public class EventBusBasicTest extends TestCase {
         assertEquals(event, test2.lastStringEvent);
     }
 
+    @Test
     public void testPostMultipleTimes() {
         eventBus.register(this);
         MyEvent event = new MyEvent();
@@ -133,6 +152,7 @@ public class EventBusBasicTest extends TestCase {
         assertEquals(count, countMyEvent);
     }
 
+    @Test
     public void testPostAfterUnregister() {
         eventBus.register(this);
         eventBus.unregister(this);
@@ -140,6 +160,7 @@ public class EventBusBasicTest extends TestCase {
         assertNull(lastStringEvent);
     }
 
+    @Test
     public void testRegisterAndPostTwoTypes() {
         eventBus.register(this);
         eventBus.post(42);
@@ -150,6 +171,7 @@ public class EventBusBasicTest extends TestCase {
         assertEquals("Hello", lastStringEvent);
     }
 
+    @Test
     public void testRegisterUnregisterAndPostTwoTypes() {
         eventBus.register(this);
         eventBus.unregister(this);
@@ -160,12 +182,14 @@ public class EventBusBasicTest extends TestCase {
         assertEquals(0, countStringEvent);
     }
 
+    @Test
     public void testPostOnDifferentEventBus() {
         eventBus.register(this);
         new EventBus().post("Hello");
         assertEquals(0, countStringEvent);
     }
 
+    @Test
     public void testPostInEventHandler() {
         RepostInteger reposter = new RepostInteger();
         eventBus.register(reposter);
@@ -177,6 +201,7 @@ public class EventBusBasicTest extends TestCase {
         assertEquals(10, reposter.lastEvent);
     }
 
+    @Test
     public void testHasSubscriberForEvent() {
         assertFalse(eventBus.hasSubscriberForEvent(String.class));
 
@@ -187,6 +212,7 @@ public class EventBusBasicTest extends TestCase {
         assertFalse(eventBus.hasSubscriberForEvent(String.class));
     }
 
+    @Test
     public void testHasSubscriberForEventSuperclass() {
         assertFalse(eventBus.hasSubscriberForEvent(String.class));
 
@@ -201,7 +227,11 @@ public class EventBusBasicTest extends TestCase {
         assertFalse(eventBus.hasSubscriberForEvent(String.class));
     }
 
+    @Test
     public void testHasSubscriberForEventImplementedInterface() {
+        if(PlatformUtils.isJ2objc())
+            return;
+
         assertFalse(eventBus.hasSubscriberForEvent(String.class));
 
         Object subscriber = new Object() {

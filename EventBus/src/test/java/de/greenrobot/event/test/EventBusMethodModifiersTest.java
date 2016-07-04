@@ -16,14 +16,23 @@
 package de.greenrobot.event.test;
 
 import android.os.Looper;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.EventBusException;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMethodModifiersTest extends AbstractEventBusTest {
 
+    @Test
     public void testRegisterForEventTypeAndPost() throws InterruptedException {
         eventBus.register(this);
         String event = "Hello";
@@ -31,6 +40,7 @@ public class EventBusMethodModifiersTest extends AbstractEventBusTest {
         waitForEventCount(4, 1000);
     }
 
+    @Test
     public void testIllegalMethodNameThrow() {
         try {
             eventBus.register(new IllegalEventMethodName());
@@ -40,6 +50,7 @@ public class EventBusMethodModifiersTest extends AbstractEventBusTest {
         }
     }
 
+    @Test
     public void testIllegalMethodNameSkip() {
         eventBus=EventBus.builder().skipMethodVerificationFor(IllegalEventMethodName.class).build();
         eventBus.register(new IllegalEventMethodName());

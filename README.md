@@ -1,6 +1,9 @@
 #Doppl Changes
 UI related stuff removed. Error dialog and such.
 
+## Issues
+You can only run the unit tests visually in xcode, because we need main and background threads happening.
+
 EventBus
 ========
 EventBus is publish/subscribe event bus optimized for Android.<br/>

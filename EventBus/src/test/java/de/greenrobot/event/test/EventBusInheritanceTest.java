@@ -16,11 +16,20 @@
 package de.greenrobot.event.test;
 
 import junit.framework.TestCase;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusInheritanceTest extends TestCase {
 
     private EventBus eventBus;
@@ -31,11 +40,13 @@ public class EventBusInheritanceTest extends TestCase {
     private int countMyEventInterface;
     private int countMyEventInterfaceExtended;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         super.setUp();
         eventBus = new EventBus();
     }
 
+    @Test
     public void testEventClassHierarchy() {
         eventBus.register(this);
 
@@ -52,6 +63,7 @@ public class EventBusInheritanceTest extends TestCase {
         assertEquals(1, countMyEventExtended);
     }
 
+    @Test
     public void testEventInterfaceHierarchy() {
         eventBus.register(this);
 
@@ -63,6 +75,7 @@ public class EventBusInheritanceTest extends TestCase {
         assertEquals(1, countMyEventInterfaceExtended);
     }
 
+    @Test
     public void testEventSuperInterfaceHierarchy() {
         eventBus.register(this);
 
@@ -72,6 +85,7 @@ public class EventBusInheritanceTest extends TestCase {
         assertEquals(1, countMyEventInterfaceExtended);
     }
 
+    @Test
     public void testSubscriberClassHierarchy() {
         SubscriberExtended subscriber = new SubscriberExtended();
         eventBus.register(subscriber);

@@ -21,17 +21,28 @@ import java.util.concurrent.CountDownLatch;
 import android.os.Handler;
 import android.os.Looper;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import co.touchlab.doppel.testing.DoppelHacks;
+import co.touchlab.doppel.testing.DoppelTest;
+import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
+
 /**
  * @author Markus Junginger, greenrobot
  */
+@DoppelTest
+@DoppelHacks //Threading is slower for some reason, so number of iterations was set to 100 instead of 1000
+@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMainThreadRacingTest extends AbstractEventBusTest {
 
-    private static final int ITERATIONS = LONG_TESTS ? 100000 : 1000;
+    private static final int ITERATIONS = LONG_TESTS ? 100000 : 100;
 
     protected boolean unregistered;
     private CountDownLatch startLatch;
     private volatile RuntimeException failed;
 
+    @Test
     public void testRacingThreads() throws InterruptedException {
         Runnable register = new Runnable() {
             @Override
