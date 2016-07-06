@@ -1,3 +1,4 @@
-include 'EventBus'
+include ':EventBus'
 // include 'EventBusTest'
 // include 'EventBusPerformance'
+project(":EventBus").name = 'eventbus'

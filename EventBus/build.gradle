@@ -3,7 +3,7 @@ apply plugin: "net.ltgt.apt"
 apply plugin: 'com.touchlab.doppel.doppelgradle'
 apply plugin: 'maven-publish'
 
-group = 'doppel.de.greenrobot'
+group = 'doppl.de.greenrobot'
 version = '2.4.0.0'
 
 sourceCompatibility = 1.7
@@ -24,6 +24,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            artifactId 'eventbus'
 
             artifact doppelArchive
         }
