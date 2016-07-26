@@ -16,19 +16,16 @@
 package de.greenrobot.event.test;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.concurrent.CountDownLatch;
 
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBusException;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusCancelEventDeliveryTest extends AbstractEventBusTest {
 
     private Throwable failed;

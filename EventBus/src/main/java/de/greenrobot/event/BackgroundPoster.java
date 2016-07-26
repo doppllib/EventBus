@@ -16,6 +16,7 @@
 package de.greenrobot.event;
 
 import android.util.Log;
+import com.google.j2objc.annotations.Weak;
 
 /**
  * Posts events in background.
@@ -25,6 +26,7 @@ import android.util.Log;
 final class BackgroundPoster implements Runnable {
 
     private final PendingPostQueue queue;
+    @Weak
     private final EventBus eventBus;
 
     private volatile boolean executorRunning;

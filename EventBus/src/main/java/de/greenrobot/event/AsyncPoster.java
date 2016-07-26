@@ -15,6 +15,7 @@
  */
 package de.greenrobot.event;
 
+import com.google.j2objc.annotations.Weak;
 
 /**
  * Posts events in background.
@@ -24,6 +25,8 @@ package de.greenrobot.event;
 class AsyncPoster implements Runnable {
 
     private final PendingPostQueue queue;
+
+    @Weak
     private final EventBus eventBus;
 
     AsyncPoster(EventBus eventBus) {

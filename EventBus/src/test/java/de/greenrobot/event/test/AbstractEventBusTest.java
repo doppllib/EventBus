@@ -15,18 +15,19 @@
  */
 package de.greenrobot.event.test;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+
+import junit.framework.TestCase;
+
+import org.junit.Before;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import junit.framework.TestCase;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-
-import org.junit.Before;
 
 import de.greenrobot.event.EventBus;
 

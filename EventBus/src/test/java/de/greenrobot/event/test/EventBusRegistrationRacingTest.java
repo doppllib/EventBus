@@ -16,7 +16,6 @@
 package de.greenrobot.event.test;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +23,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
-
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusRegistrationRacingTest extends AbstractEventBusTest {
 
     // On a Nexus 5, bad synchronization always failed on the first iteration or went well completely.

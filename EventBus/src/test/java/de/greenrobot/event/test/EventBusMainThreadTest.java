@@ -15,23 +15,19 @@
  */
 package de.greenrobot.event.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Looper;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMainThreadTest extends AbstractEventBusTest {
 
     private BackgroundPoster backgroundPoster;

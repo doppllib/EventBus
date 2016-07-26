@@ -19,11 +19,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
+import com.google.j2objc.annotations.Weak;
 
 final class HandlerPoster extends Handler {
 
     private final PendingPostQueue queue;
     private final int maxMillisInsideHandleMessage;
+    @Weak
     private final EventBus eventBus;
     private boolean handlerActive;
 

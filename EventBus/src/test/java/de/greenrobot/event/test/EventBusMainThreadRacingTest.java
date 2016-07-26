@@ -15,25 +15,22 @@
  */
 package de.greenrobot.event.test;
 
-import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-
 import android.os.Handler;
 import android.os.Looper;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 import co.touchlab.doppel.testing.DoppelHacks;
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
 @DoppelHacks //Threading is slower for some reason, so number of iterations was set to 100 instead of 1000
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMainThreadRacingTest extends AbstractEventBusTest {
 
     private static final int ITERATIONS = LONG_TESTS ? 100000 : 100;

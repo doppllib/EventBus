@@ -18,16 +18,13 @@ package de.greenrobot.event.test;
 import android.os.Looper;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusBackgroundThreadTest extends AbstractEventBusTest {
 
     @Test

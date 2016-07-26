@@ -15,22 +15,20 @@
  */
 package de.greenrobot.event.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
-import de.greenrobot.event.EventBus;
 import android.util.Log;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusOrderedSubscriptionsTest extends AbstractEventBusTest {
 
     int lastPrio = Integer.MAX_VALUE;

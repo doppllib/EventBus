@@ -15,26 +15,23 @@
  */
 package de.greenrobot.event.test;
 
+import android.os.Looper;
+import android.util.Log;
+
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import android.os.Looper;
-import android.util.Log;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
 import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusMultithreadedTest extends AbstractEventBusTest {
 
     private static final int COUNT = LONG_TESTS ? 100000 : 1000;

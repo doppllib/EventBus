@@ -15,28 +15,25 @@
  */
 package de.greenrobot.event.test;
 
-import android.app.Application;
 import android.content.IOSContext;
 import android.util.Log;
 
-import co.touchlab.doppel.testing.DoppelHacks;
-import co.touchlab.doppel.testing.DoppelTest;
-import co.touchlab.doppel.testing.DopplSkipJavaJUnit4ClassRunner;
-import co.touchlab.doppel.testing.PlatformUtils;
-import de.greenrobot.event.EventBus;
 import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.lang.ref.WeakReference;
+
+import co.touchlab.doppel.testing.DoppelHacks;
+import co.touchlab.doppel.testing.PlatformUtils;
+import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
+import co.touchlab.doppel.testing.DoppelTest;
 @DoppelTest
-@RunWith(DopplSkipJavaJUnit4ClassRunner.class)
 public class EventBusBasicTest extends TestCase {
 
     private EventBus eventBus;
