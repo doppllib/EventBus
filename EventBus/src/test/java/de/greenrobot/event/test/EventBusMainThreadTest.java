@@ -26,8 +26,8 @@ import java.util.List;
 /**
  * @author Markus Junginger, greenrobot
  */
-import co.touchlab.doppel.testing.DoppelTest;
-@DoppelTest
+import co.touchlab.doppl.testing.DopplTest;
+@DopplTest
 public class EventBusMainThreadTest extends AbstractEventBusTest {
 
     private BackgroundPoster backgroundPoster;

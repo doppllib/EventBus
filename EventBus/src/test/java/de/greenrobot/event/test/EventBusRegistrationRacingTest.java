@@ -26,8 +26,8 @@ import java.util.concurrent.Executors;
 /**
  * @author Markus Junginger, greenrobot
  */
-import co.touchlab.doppel.testing.DoppelTest;
-@DoppelTest
+import co.touchlab.doppl.testing.DopplTest;
+@DopplTest
 public class EventBusRegistrationRacingTest extends AbstractEventBusTest {
 
     // On a Nexus 5, bad synchronization always failed on the first iteration or went well completely.

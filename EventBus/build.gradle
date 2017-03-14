@@ -1,32 +1,40 @@
 apply plugin: 'java'
-apply plugin: "net.ltgt.apt"
-apply plugin: 'com.touchlab.doppel.doppelgradle'
-apply plugin: 'maven-publish'
-
-group = 'doppl.de.greenrobot'
-version = '2.4.0.2'
+apply plugin: 'net.ltgt.apt'
+apply plugin: 'co.touchlab.doppl.gradle'
+apply plugin: 'ivy-publish'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 dependencies {
     compile 'junit:junit:4.11'
-    testApt 'co.touchlab.doppel:testapt:0.3.1-SNAPSHOT'
+    testApt "co.touchlab.doppl:testapt:$dopplCoreVersion"
+
+    provided "co.touchlab.doppl:androidbase:$dopplCoreVersion"
+    testCompile "co.touchlab.doppl:androidbasetest:$dopplCoreVersion"
+
+    doppl "co.touchlab.doppl:androidbase:$dopplCoreVersion:doppl"
+    testDoppl "co.touchlab.doppl:androidbasetest:$dopplCoreVersion:doppl"
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId 'eventbus'
+group = 'de.greenrobot'
+version = dopplEventbusVersion
 
-            artifact doppelArchive
+publishing {
+
+    publications {
+        ivy(IvyPublication) {
+            from components.java
+            module 'eventbus'
+            artifact(dopplArchive) {
+                classifier 'doppl'
+                extension 'jar'
+            }
         }
     }
+
     repositories {
-        maven {
-            url dopplMavenDeploy
-        }
+        ivy { url dopplIvyDeploy }
     }
 }
 
@@ -34,29 +42,9 @@ test{
     enabled = false
 }
 
-j2objcTestDebug{
-    enabled = false
-}
-
-j2objcTestRelease{
-    enabled = false
-}
-
-j2objcConfig {
-    extraLinkerArgs '-lsqlite3'
-
-    testMinExpectedTests 0
-
-    xcodeTestProjectDir '../ios'  //  suggested directory name
-    xcodeTestTargetsIos 'ios', 'iosTests'  // replace with your iOS targets
-
-    extraObjcCompilerArgs '-Wno-deprecated'
-
+dopplConfig {
     cycleFinderArgs '--whitelist', 'cycle_whitelist.txt'
-
-    testPattern {
-        include '**/*Test.java'
-    }
-
-    finalConfigure()          // Must be last call to configuration
+    copyMainOutput="../iostest/eventbusframework/main"
+    copyTestOutput="../iostest/eventbusframework/test"
+    copyDependencies true
 }

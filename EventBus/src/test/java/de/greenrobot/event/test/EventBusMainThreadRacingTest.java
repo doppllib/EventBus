@@ -23,14 +23,14 @@ import org.junit.Test;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-import co.touchlab.doppel.testing.DoppelHacks;
+import co.touchlab.doppl.testing.DopplHacks;
 
 /**
  * @author Markus Junginger, greenrobot
  */
-import co.touchlab.doppel.testing.DoppelTest;
-@DoppelTest
-@DoppelHacks //Threading is slower for some reason, so number of iterations was set to 100 instead of 1000
+import co.touchlab.doppl.testing.DopplTest;
+@DopplTest
+@DopplHacks //Threading is slower for some reason, so number of iterations was set to 100 instead of 1000
 public class EventBusMainThreadRacingTest extends AbstractEventBusTest {
 
     private static final int ITERATIONS = LONG_TESTS ? 100000 : 100;

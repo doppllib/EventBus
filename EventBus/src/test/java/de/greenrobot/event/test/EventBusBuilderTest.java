@@ -26,8 +26,8 @@ import de.greenrobot.event.SubscriberExceptionEvent;
 /**
  * @author Markus Junginger, greenrobot
  */
-import co.touchlab.doppel.testing.DoppelTest;
-@DoppelTest
+import co.touchlab.doppl.testing.DopplTest;
+@DopplTest
 public class EventBusBuilderTest extends AbstractEventBusTest {
 
     @Test

@@ -25,15 +25,15 @@ import org.junit.Test;
 
 import java.lang.ref.WeakReference;
 
-import co.touchlab.doppel.testing.DoppelHacks;
-import co.touchlab.doppel.testing.PlatformUtils;
+import co.touchlab.doppl.testing.DopplHacks;
+import co.touchlab.doppl.utils.PlatformUtils;
 import de.greenrobot.event.EventBus;
 
 /**
  * @author Markus Junginger, greenrobot
  */
-import co.touchlab.doppel.testing.DoppelTest;
-@DoppelTest
+import co.touchlab.doppl.testing.DopplTest;
+@DopplTest
 public class EventBusBasicTest extends TestCase {
 
     private EventBus eventBus;
@@ -77,7 +77,7 @@ public class EventBusBasicTest extends TestCase {
         eventBus.unregister(this);
     }
 
-    @DoppelHacks //Not sure how to test weak reference in j2objc
+    @DopplHacks //Not sure how to test weak reference in j2objc
     public void testUnregisterNotLeaking() {
         if(PlatformUtils.isJ2objc())
             return;

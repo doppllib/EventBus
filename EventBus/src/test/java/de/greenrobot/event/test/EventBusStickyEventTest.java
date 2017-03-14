@@ -20,8 +20,8 @@ import org.junit.Test;
 /**
  * @author Markus Junginger, greenrobot
  */
-import co.touchlab.doppel.testing.DoppelTest;
-@DoppelTest
+import co.touchlab.doppl.testing.DopplTest;
+@DopplTest
 public class EventBusStickyEventTest extends AbstractEventBusTest {
 
     @Test
