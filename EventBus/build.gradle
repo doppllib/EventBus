@@ -1,42 +1,31 @@
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt'
-apply plugin: 'co.touchlab.doppl.gradle'
-apply plugin: 'ivy-publish'
+apply plugin: 'co.doppl.gradle'
+apply plugin: 'maven-publish'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+def dopplCoreVersion = '0.7.1'
+
 dependencies {
     compile 'junit:junit:4.11'
-    testApt "co.touchlab.doppl:testapt:$dopplCoreVersion"
+    testApt "co.doppl.lib:testapt:$dopplCoreVersion"
 
-    provided "co.touchlab.doppl:androidbase:$dopplCoreVersion"
-    testCompile "co.touchlab.doppl:androidbasetest:$dopplCoreVersion"
+    provided "co.doppl.lib:androidbase:$dopplCoreVersion"
+    testCompile "co.doppl.lib:androidbasetest:$dopplCoreVersion"
 
-    doppl "co.touchlab.doppl:androidbase:$dopplCoreVersion:doppl"
-    testDoppl "co.touchlab.doppl:androidbasetest:$dopplCoreVersion:doppl"
+    doppl "co.doppl.lib:androidbase:$dopplCoreVersion:doppl"
+    testDoppl "co.doppl.lib:androidbasetest:$dopplCoreVersion:doppl"
 }
 
-group = 'de.greenrobot'
-version = dopplEventbusVersion
+group = 'co.doppl.de.greenrobot'
+version = '2.4.0.0'
 
-publishing {
+ext.bintrayGitUrl = 'https://github.com/doppllib/EventBus-doppl.git'
 
-    publications {
-        ivy(IvyPublication) {
-            from components.java
-            module 'eventbus'
-            artifact(dopplArchive) {
-                classifier 'doppl'
-                extension 'jar'
-            }
-        }
-    }
-
-    repositories {
-        ivy { url dopplIvyDeploy }
-    }
-}
+apply from: "$dopplSharedScriptHome/doppllibpublish.gradle"
+apply from: "$dopplSharedScriptHome/bintray.gradle"
 
 test{
     enabled = false
@@ -44,7 +33,7 @@ test{
 
 dopplConfig {
     cycleFinderArgs '--whitelist', 'cycle_whitelist.txt'
-    copyMainOutput="../iostest/eventbusframework/main"
-    copyTestOutput="../iostest/eventbusframework/test"
+    copyMainOutput "../iostest/eventbusframework/main"
+    copyTestOutput "../iostest/eventbusframework/test"
     copyDependencies true
 }
