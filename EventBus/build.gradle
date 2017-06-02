@@ -6,7 +6,7 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def dopplCoreVersion = '0.7.1'
+def dopplCoreVersion = '0.7.2-SNAPSHOT'
 
 dependencies {
     compile 'junit:junit:4.11'
@@ -20,7 +20,7 @@ dependencies {
 }
 
 group = 'co.doppl.de.greenrobot'
-version = '2.4.0.0'
+version = '2.4.0.1-SNAPSHOT'
 
 ext.bintrayGitUrl = 'https://github.com/doppllib/EventBus-doppl.git'
 
