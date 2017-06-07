@@ -9,7 +9,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.ltgt.gradle:gradle-apt-plugin:0.9'
-        classpath 'co.doppl:gradle:0.7.0'
+        classpath 'co.doppl:gradle:0.8.0'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
