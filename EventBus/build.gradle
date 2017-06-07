@@ -21,7 +21,7 @@ dependencies {
 }
 
 group = 'co.doppl.de.greenrobot'
-version = '2.4.0.2'
+version = '2.4.0.3-SNAPSHOT'
 
 ext.bintrayGitUrl = 'https://github.com/doppllib/EventBus.git'
 
