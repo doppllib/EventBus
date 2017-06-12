@@ -1,78 +1,36 @@
-# Doppl Stuff
+# Doppl Fork
 
-Master is a very different version of eventbus than most projects use. Only 2.4.0 is supported for Doppl. See the v2.4.0 branch.
+This is a fork of the Eventbus library to provide tests and modifications to support 
+iOS development with J2objc using the [Doppl build framework](http://doppl.co/).
 
-EventBus
-========
-EventBus is a publish/subscribe event bus optimized for Android.<br/>
-<img src="EventBus-Publish-Subscribe.png" width="500" height="187"/>
+## Versions
 
-EventBus...
+[2.4.0](https://github.com/doppllib/EventBus)
 
- * simplifies the communication between components
-    * decouples event senders and receivers
-    * performs well with Activities, Fragments, and background threads
-    * avoids complex and error-prone dependencies and life cycle issues
- * makes your code simpler
- * is fast
- * is tiny (~50k jar)
- * is proven in practice by apps with 100,000,000+ installs
- * has advanced features like delivery threads, subscriber priorities, etc.
+## Usage
 
- [![Build Status](https://travis-ci.org/greenrobot/EventBus.svg?branch=master)](https://travis-ci.org/greenrobot/EventBus)
-
-EventBus in 3 steps
--------------------
-1. Define events:<br/>
-<code>public class MessageEvent { /* Additional fields if needed */ }</code><br/><br/>
-2. Prepare subscribers<br/>
-Register your subscriber (in your onCreate or in a constructor):<br/>
-<code>eventBus.register(this);</code><br/><br/>
-Declare your subscribing method:<br/>
-<code>@Subscribe</code><br/>
-<code>public void onEvent(AnyEventType event) {/* Do something */};</code><br/><br/>
-3. Post events:<br/>
-<code>eventBus.post(event);</code>
-
-This [getting started guide](http://greenrobot.org/eventbus/documentation/how-to-get-started/) shows these 3 steps in more detail.
-
-Add EventBus to your project
-----------------------------
-Please ensure that you are using the latest version by [checking here](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.greenrobot%22%20AND%20a%3A%22eventbus%22)
-
-Gradle:
-```
-    compile 'org.greenrobot:eventbus:3.0.0'
+```groovy
+dependencies {
+    compile 'de.greenrobot:eventbus:2.4.0'
+    doppl 'co.doppl.de.greenrobot:eventbus:2.4.0.3-SNAPSHOT'
+}
 ```
 
-Maven:
-```
-<dependency>
-    <groupId>org.greenrobot</groupId>
-    <artifactId>eventbus</artifactId>
-    <version>3.0.0</version>
-</dependency>
-```
+## Status
 
-[Or download EventBus from Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22de.greenrobot%22%20AND%20a%3A%22eventbus%22)
+Stable. No known memory issues. Minor test issues related to iOS/Java differences.
 
-Homepage, Documentation, Links
-------------------------------
-For more details on EventBus please check [EventBus' website](http://greenrobot.org/eventbus). Here are some direct links you may find useful:
+## Notes
 
-[Features](http://greenrobot.org/eventbus/features/)
+There was some UI related stuff, which was removed. Error dialog and such.
 
-[Documentation](http://greenrobot.org/eventbus/documentation/)
+Tests need to be run in Xcode manually because of main thread/background thread involvement.
 
-[Changelog](http://greenrobot.org/eventbus/changelog/)
+## Library Development
 
-[FAQ](http://greenrobot.org/eventbus/documentation/faq/)
+See [docs](http://doppl.co/docs/createlibrary.html) for an overview of our setup and repo org for forked library development.
 
-How does EventBus compare to other solutions, like Otto from Square? Check this [comparison](COMPARISON.md).
-
-License
--------
-Copyright (C) 2012-2016 Markus Junginger, greenrobot (http://greenrobot.org)
+# License
 
 EventBus binaries and source code can be used according to the [Apache License, Version 2.0](LICENSE).
 
@@ -82,4 +40,4 @@ More Open Source by greenrobot
 
 [__greenDAO__](https://github.com/greenrobot/greenDAO) is an ORM optimized for Android: it maps database tables to Java objects and uses code generation for optimal speed.
 
-[Follow us on Google+](https://plus.google.com/b/114381455741141514652/+GreenrobotDe/posts) or check our [homepage](http://greenrobot.org/) to stay up to date.
+[Follow us on Google+](https://plus.google.com/b/114381455741141514652/+GreenrobotDe/posts) to stay up to date.
