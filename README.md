@@ -12,7 +12,7 @@ iOS development with J2objc using the [Doppl build framework](http://doppl.co/).
 ```groovy
 dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
-    doppl 'co.doppl.de.greenrobot:eventbus:2.4.0.2'
+    doppl 'co.doppl.de.greenrobot:eventbus:2.4.0.3'
 }
 ```
 
