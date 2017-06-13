@@ -26,9 +26,11 @@ There was some UI related stuff, which was removed. Error dialog and such.
 
 Tests need to be run in Xcode manually because of main thread/background thread involvement.
 
-Release History, License
-------------------------
-[CHANGELOG](CHANGELOG.md)
+## Library Development
+
+See [docs](http://doppl.co/docs/createlibrary.html) for an overview of our setup and repo org for forked library development.
+
+# License
 
 EventBus binaries and source code can be used according to the [Apache License, Version 2.0](LICENSE).
 

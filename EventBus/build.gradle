@@ -6,14 +6,14 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def javaCoreVersion = '0.7.4'
-def dopplCoreVersion = '0.7.4.0'
+def javaCoreVersion = '0.7.5'
+def dopplCoreVersion = '0.7.5.0'
 
 dependencies {
-    compile 'junit:junit:4.11'
+    testCompile 'junit:junit:4.11'
     testApt "co.doppl.lib:testapt:$javaCoreVersion"
 
-    provided "co.doppl.lib:androidbase:$javaCoreVersion"
+    compileOnly "co.doppl.lib:androidbase:$javaCoreVersion"
     testCompile "co.doppl.lib:androidbasetest:$javaCoreVersion"
 
     doppl "co.doppl.lib:androidbase:$dopplCoreVersion"
@@ -21,7 +21,7 @@ dependencies {
 }
 
 group = 'co.doppl.de.greenrobot'
-version = '2.4.0.3-SNAPSHOT'
+version = '2.4.0.3'
 
 ext.bintrayGitUrl = 'https://github.com/doppllib/EventBus.git'
 
